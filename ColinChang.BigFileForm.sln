@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ColinChang.BigFileForm", "ColinChang.BigFileForm\ColinChang.BigFileForm.csproj", "{50B829BE-F1D5-4776-9430-2FA9DEE39D4D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ColinChang.BigFileForm.Sample", "ColinChang.BigFileForm.Sample\ColinChang.BigFileForm.Sample.csproj", "{52018114-9ED9-47B0-AADE-3216D81AEE45}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{50B829BE-F1D5-4776-9430-2FA9DEE39D4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50B829BE-F1D5-4776-9430-2FA9DEE39D4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50B829BE-F1D5-4776-9430-2FA9DEE39D4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50B829BE-F1D5-4776-9430-2FA9DEE39D4D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52018114-9ED9-47B0-AADE-3216D81AEE45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52018114-9ED9-47B0-AADE-3216D81AEE45}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52018114-9ED9-47B0-AADE-3216D81AEE45}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52018114-9ED9-47B0-AADE-3216D81AEE45}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Title>BigFileForm</Title>
+        <Authors>Colin Chang</Authors>
+        <Description>a middleware that can process multiple form parameters including big files and texts in a POST method by overriding object "HttpConext.Request.Form"</Description>
+        <Copyright>https://ccstudio.org</Copyright>
+        <PackageProjectUrl>https://github.com/colin-chang/bigfileform</PackageProjectUrl>
+        <PackageLicenseFile>LICENSE</PackageLicenseFile>
+        <RepositoryUrl>https://github.com/colin-chang/bigfileform</RepositoryUrl>
+        <RepositoryType>GitHub</RepositoryType>
+        <PackageIcon>icon.png</PackageIcon>
+        <PackageTags>upload big file,post form file,multiple parameters,multiple form parameters,middleware</PackageTags>
+        <PackageVersion>1.0.1</PackageVersion>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Include="..\LICENSE">
+            <Pack>True</Pack>
+            <PackagePath></PackagePath>
+        </None>
+        <None Include="..\icon.png" Pack="true" PackagePath="" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="BouncyCastle.NetCore" Version="1.8.6" />
+    </ItemGroup>
+
+</Project>
