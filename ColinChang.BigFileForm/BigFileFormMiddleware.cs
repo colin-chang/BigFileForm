@@ -30,7 +30,7 @@ namespace ColinChang.BigFileForm
             if (MultipartRequestHelper.IsMultipartContentType(context.Request.ContentType)
                 && context.Request.ContentLength >= _minBodySize
                 && context.Request.ContentLength <= _maxBodySize
-                && context.Request.Method == HttpMethods.Post)
+                && (HttpMethods.IsPatch(context.Request.Method) || HttpMethods.IsPut(context.Request.Method)))
             {
                 var fields = new Dictionary<string, StringValues>();
                 var files = new FormFileCollection();

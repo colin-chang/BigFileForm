@@ -5,15 +5,15 @@
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Title>BigFileForm</Title>
         <Authors>Colin Chang</Authors>
-        <Description>a middleware that can process multiple form parameters including big files and texts in a POST method by overriding object "HttpConext.Request.Form"</Description>
+        <Description>an Asp.Net Core middleware that can process multiple form parameters including big files and texts in a POST/PUT method by overriding object "HttpConext.Request.Form" and "HttpConext.Request.Form.Files".</Description>
         <Copyright>https://ccstudio.org</Copyright>
         <PackageProjectUrl>https://github.com/colin-chang/bigfileform</PackageProjectUrl>
         <PackageLicenseFile>LICENSE</PackageLicenseFile>
         <RepositoryUrl>https://github.com/colin-chang/bigfileform</RepositoryUrl>
         <RepositoryType>GitHub</RepositoryType>
         <PackageIcon>icon.png</PackageIcon>
-        <PackageTags>upload big file,post form file,multiple parameters,multiple form parameters,middleware</PackageTags>
-        <PackageVersion>1.0.1</PackageVersion>
+        <PackageTags>upload,big,form,file,,multiple-parameters,middleware</PackageTags>
+        <PackageVersion>1.0.2</PackageVersion>
     </PropertyGroup>
 
     <ItemGroup>
