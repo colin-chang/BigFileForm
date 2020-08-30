@@ -8,7 +8,7 @@ an Asp.Net Core middleware that can process multiple form parameters including b
 ## How to use it?
 this middleware is easy to be used by a few steps.
 ### configuration
-configure the file size limiation in `appsettings.json`.
+configures the file size limitation in `appsettings.json`.
 ```json
 {
   "BigFileFormOptions": {
@@ -39,7 +39,7 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 ```
 
 ### try it
-after using this middleware, you could get your bigfile and text parameters by `Request.Form.Files` and `Request.Forms` when you try to upload a big file between `MinBodySize` and `MaxBodySize`. It can only works in a POST or PUT method.
+after using this middleware, you could get your big file and text parameters by `Request.Form.Files` and `Request.Forms` when you try to upload a big file between `MinBodySize` and `MaxBodySize`. It can only work in a POST or PUT method.
 
 
 ```csharp
@@ -68,7 +68,7 @@ public class TestController : ControllerBase
 ![upload big file with multiple parameters](https://i.loli.net/2020/08/27/7MqlOGDm8IAkiwx.jpg)
 
 ### file size limitation
-when we try to upload a big file, we have to know both Kestrel server and default form have its limitation. We could adjust them by configuring `KestrelServerOptions` and `FormOptions`.
+when we try to upload a big file, we have to know both the Kestrel server and default form have its limitation. We could adjust them by configuring `KestrelServerOptions` and `FormOptions`.
 
 ```json
 {
