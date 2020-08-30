@@ -54,7 +54,7 @@ namespace ColinChang.BigFileForm
                             await section.Body.CopyToAsync(memoryStream);
 
                             // Check if the file is empty or exceeds the size limit.
-                            if (memoryStream.Length == 0)
+                            if (memoryStream.Length <= 0)
                                 throw new InvalidParameterException("the file must be not empty");
 
                             if (memoryStream.Length > _maxBodySize)
