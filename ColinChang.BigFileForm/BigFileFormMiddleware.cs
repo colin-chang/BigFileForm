@@ -27,11 +27,14 @@ namespace ColinChang.BigFileForm
 
         public async Task InvokeAsync(HttpContext context)
         {
-            if (MultipartRequestHelper.IsMultipartContentType(context.Request.ContentType)
+            if (context.Request.HasFormContentType
                 && context.Request.ContentLength >= _minBodySize
                 && context.Request.ContentLength <= _maxBodySize
-                && (HttpMethods.IsPatch(context.Request.Method) || HttpMethods.IsPut(context.Request.Method)))
+                && (HttpMethods.IsPost(context.Request.Method) || HttpMethods.IsPut(context.Request.Method)))
             {
+                //允许Request.Body多次读取
+                context.Request.EnableBuffering();
+
                 var fields = new Dictionary<string, StringValues>();
                 var files = new FormFileCollection();
 
@@ -68,8 +71,6 @@ namespace ColinChang.BigFileForm
                             else
                             {
                                 var filename = contentDisposition.FileName.Value;
-                                var ext = Path.GetExtension(filename).ToLowerInvariant();
-
                                 files.Add(new FormFile(memoryStream, 0, memoryStream.Length,
                                     contentDisposition.Name.Value,
                                     filename));

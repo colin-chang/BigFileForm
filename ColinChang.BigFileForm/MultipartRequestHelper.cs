@@ -19,16 +19,6 @@ namespace ColinChang.BigFileForm
             return boundary;
         }
 
-        public static bool IsMultipartContentType(string contentType) =>
-            !string.IsNullOrEmpty(contentType)
-            && contentType.IndexOf("multipart/", StringComparison.OrdinalIgnoreCase) >= 0;
-
-        public static bool HasFormDataContentDisposition(ContentDispositionHeaderValue contentDisposition) =>
-            contentDisposition != null
-            && contentDisposition.DispositionType.Equals("form-data")
-            && string.IsNullOrEmpty(contentDisposition.FileName.Value)
-            && string.IsNullOrEmpty(contentDisposition.FileNameStar.Value);
-
         public static bool HasFileContentDisposition(ContentDispositionHeaderValue contentDisposition) =>
             contentDisposition != null
             && contentDisposition.DispositionType.Equals("form-data")

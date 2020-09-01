@@ -8,9 +8,5 @@
       <ProjectReference Include="..\ColinChang.BigFileForm\ColinChang.BigFileForm.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Options" />
-    </ItemGroup>
-
 
 </Project>

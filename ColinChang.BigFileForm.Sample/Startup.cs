@@ -44,10 +44,8 @@ namespace ColinChang.BigFileForm.Sample
             }
 
             app.UseRouting();
-
             // use big file form middleware
             app.UseBigFileForm();
-
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
     }
