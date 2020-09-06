@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Primitives;
 using Microsoft.Net.Http.Headers;
-using Org.BouncyCastle.Security;
 
 namespace ColinChang.BigFileForm
 {
@@ -35,6 +34,7 @@ namespace ColinChang.BigFileForm
                 //允许Request.Body多次读取
                 context.Request.EnableBuffering();
 
+                //TODO:大文件上传直接进行磁盘存储，不可存在内存中
                 var fields = new Dictionary<string, StringValues>();
                 var files = new FormFileCollection();
 
@@ -44,40 +44,40 @@ namespace ColinChang.BigFileForm
 
                 try
                 {
-                    var section = await reader.ReadNextSectionAsync();
-                    while (section != null)
+                    MultipartSection section;
+                    while ((section = await reader.ReadNextSectionAsync()) != null)
                     {
                         var hasContentDispositionHeader =
                             ContentDispositionHeaderValue.TryParse(
                                 section.ContentDisposition, out var contentDisposition);
 
-                        if (hasContentDispositionHeader)
+                        if (!hasContentDispositionHeader)
+                            continue;
+
+                        //TODO:超过50M则不能使用MemoryStream
+                        var memoryStream = new MemoryStream();
+                        await section.Body.CopyToAsync(memoryStream);
+
+                        // Check if the file is empty or exceeds the size limit.
+                        if (memoryStream.Length <= 0)
+                            continue;
+
+                        if (memoryStream.Length > _maxBodySize)
+                            throw new ArgumentOutOfRangeException(
+                                $"the content is oversize");
+
+                        if (!MultipartRequestHelper
+                            .HasFileContentDisposition(contentDisposition))
                         {
-                            var memoryStream = new MemoryStream();
-                            await section.Body.CopyToAsync(memoryStream);
-
-                            // Check if the file is empty or exceeds the size limit.
-                            if (memoryStream.Length <= 0)
-                                throw new InvalidParameterException("the file must be not empty");
-
-                            if (memoryStream.Length > _maxBodySize)
-                                throw new ArgumentOutOfRangeException(
-                                    $"the file is too large and exceeds {_maxBodySize / 1024 / 1024:N1} MB");
-
-                            if (!MultipartRequestHelper
-                                .HasFileContentDisposition(contentDisposition))
-                                fields[contentDisposition.Name.Value.ToLower()] =
-                                    Encoding.Default.GetString(memoryStream.ToArray());
-                            else
-                            {
-                                var filename = contentDisposition.FileName.Value;
-                                files.Add(new FormFile(memoryStream, 0, memoryStream.Length,
-                                    contentDisposition.Name.Value,
-                                    filename));
-                            }
+                            fields[contentDisposition.Name.Value.ToLower()] =
+                                Encoding.Default.GetString(memoryStream.ToArray());
+                            memoryStream.Close();
+                            await memoryStream.DisposeAsync();
                         }
-
-                        section = await reader.ReadNextSectionAsync();
+                        else
+                            files.Add(new FormFile(memoryStream, 0, memoryStream.Length,
+                                contentDisposition.Name.Value,
+                                contentDisposition.FileName.Value));
                     }
 
                     context.Request.Form = new FormCollection(fields, files);
