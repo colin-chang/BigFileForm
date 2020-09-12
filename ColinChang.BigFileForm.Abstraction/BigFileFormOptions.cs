@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace ColinChang.BigFileForm
+namespace ColinChang.BigFileForm.Abstraction
 {
     public class BigFileFormOptions
     {

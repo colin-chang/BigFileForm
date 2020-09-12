@@ -8,5 +8,7 @@
       <ProjectReference Include="..\ColinChang.BigFileForm\ColinChang.BigFileForm.csproj" />
     </ItemGroup>
 
-
+    <ItemGroup>
+        <PackageReference Include="ColinChang.BigFileForm.Abstraction" Version="1.0.0" />
+    </ItemGroup>
 </Project>

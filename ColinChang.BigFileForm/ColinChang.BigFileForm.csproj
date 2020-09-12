@@ -12,9 +12,9 @@
         <RepositoryUrl>https://github.com/colin-chang/bigfileform</RepositoryUrl>
         <RepositoryType>GitHub</RepositoryType>
         <PackageIcon>icon.png</PackageIcon>
-        <PackageTags>upload,big,form,file,,multiple-parameters,middleware</PackageTags>
-        <PackageVersion>1.1.0</PackageVersion>
-        <PackageReleaseNotes>replace the middle to an extension of HttpRequest</PackageReleaseNotes>
+        <PackageTags>upload,big,form,file,,multiple-parameters</PackageTags>
+        <PackageVersion>1.1.1</PackageVersion>
+        <PackageReleaseNotes>move dependent abstractions to ColinChang.BigFileForm.Abstractions</PackageReleaseNotes>
     </PropertyGroup>
 
     <ItemGroup>
@@ -31,6 +31,7 @@
 
     <ItemGroup>
         <PackageReference Include="BouncyCastle.NetCore" Version="1.8.6" />
+        <PackageReference Include="ColinChang.BigFileForm.Abstraction" Version="1.0.0" />
     </ItemGroup>
 
 </Project>

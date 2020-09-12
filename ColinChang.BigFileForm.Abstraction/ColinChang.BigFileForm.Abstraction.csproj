@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.1</TargetFramework>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Title>ColinChang.BigFileForm.Abstractions</Title>
+        <Authors>Colin Chang</Authors>
+        <Description>Abstractions of ColinChang.BigFileForm</Description>
+        <Copyright>https://ccstudio.org</Copyright>
+        <PackageProjectUrl>https://github.com/colin-chang/BigFileForm/tree/master/ColinChang.BigFileForm.Abstractions</PackageProjectUrl>
+        <PackageLicenseFile>LICENSE</PackageLicenseFile>
+        <RepositoryUrl>https://github.com/colin-chang/BigFileForm</RepositoryUrl>
+        <RepositoryType>GitHub</RepositoryType>
+        <PackageIcon>icon.png</PackageIcon>
+        <PackageTags>upload,big,form,file,,multiple-parameters</PackageTags>
+        <PackageVersion>1.0.0</PackageVersion>
+        <PackageReleaseNotes>move dependent abstractions to ColinChang.BigFileForm.Abstractions</PackageReleaseNotes>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Include="..\LICENSE">
+            <Pack>True</Pack>
+            <PackagePath></PackagePath>
+        </None>
+        <None Include="..\icon.png" Pack="true" PackagePath=""/>
+    </ItemGroup>
+</Project>

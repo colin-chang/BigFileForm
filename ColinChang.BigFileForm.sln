@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ColinChang.BigFileForm", "C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ColinChang.BigFileForm.Sample", "ColinChang.BigFileForm.Sample\ColinChang.BigFileForm.Sample.csproj", "{52018114-9ED9-47B0-AADE-3216D81AEE45}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ColinChang.BigFileForm.Abstraction", "ColinChang.BigFileForm.Abstraction\ColinChang.BigFileForm.Abstraction.csproj", "{C054D7B1-419A-4DF0-86C8-97857F328C7C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{52018114-9ED9-47B0-AADE-3216D81AEE45}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{52018114-9ED9-47B0-AADE-3216D81AEE45}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{52018114-9ED9-47B0-AADE-3216D81AEE45}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C054D7B1-419A-4DF0-86C8-97857F328C7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C054D7B1-419A-4DF0-86C8-97857F328C7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C054D7B1-419A-4DF0-86C8-97857F328C7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C054D7B1-419A-4DF0-86C8-97857F328C7C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
