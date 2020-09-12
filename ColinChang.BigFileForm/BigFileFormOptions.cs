@@ -1,8 +1,10 @@
+using System.Collections.Generic;
+
 namespace ColinChang.BigFileForm
 {
     public class BigFileFormOptions
     {
-        public long MinBodySize { get; set; }
-        public long MaxBodySize { get; set; }
+        public long FileSizeLimit { get; set; }
+        public IEnumerable<string> PermittedExtensions { get; set; }
     }
 }

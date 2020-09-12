@@ -5,7 +5,7 @@
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Title>BigFileForm</Title>
         <Authors>Colin Chang</Authors>
-        <Description>an Asp.Net Core middleware that can process multiple form parameters including big files and texts in a POST/PUT method by overriding object "HttpConext.Request.Form" and "HttpConext.Request.Form.Files".</Description>
+        <Description>an extension for Asp.Net Core HttpRequest that can process multiple form parameters including big files and texts in a POST/PUT method.</Description>
         <Copyright>https://ccstudio.org</Copyright>
         <PackageProjectUrl>https://github.com/colin-chang/bigfileform</PackageProjectUrl>
         <PackageLicenseFile>LICENSE</PackageLicenseFile>
@@ -13,7 +13,8 @@
         <RepositoryType>GitHub</RepositoryType>
         <PackageIcon>icon.png</PackageIcon>
         <PackageTags>upload,big,form,file,,multiple-parameters,middleware</PackageTags>
-        <PackageVersion>1.0.2</PackageVersion>
+        <PackageVersion>1.1.0</PackageVersion>
+        <PackageReleaseNotes>replace the middle to an extension of HttpRequest</PackageReleaseNotes>
     </PropertyGroup>
 
     <ItemGroup>
@@ -29,7 +30,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="BouncyCastle.NetCore" Version="1.8.6" />
+        <PackageReference Include="BouncyCastle.NetCore" Version="1.8.6" />
     </ItemGroup>
 
 </Project>

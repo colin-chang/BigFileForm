@@ -20,6 +20,7 @@ namespace ColinChang.BigFileForm.Sample
         public void ConfigureServices(IServiceCollection services)
         {
             services
+                .Configure<BigFileFormOptions>(Configuration.GetSection(nameof(BigFileFormOptions)))
                 // modify kestrel limitation
                 .Configure<KestrelServerOptions>(Configuration.GetSection(nameof(KestrelServerOptions)))
                 // modify default form limitation
@@ -29,9 +30,7 @@ namespace ColinChang.BigFileForm.Sample
                         int.Parse(Configuration["KestrelServerOptions:Limits:MaxRequestBodySize"]);
                     options.ValueLengthLimit = maxRequestBodySize;
                     options.MultipartBodyLengthLimit = maxRequestBodySize;
-                })
-                // big file form
-                .Configure<BigFileFormOptions>(Configuration.GetSection(nameof(BigFileFormOptions)));
+                });
 
             services.AddControllers();
         }
@@ -39,13 +38,9 @@ namespace ColinChang.BigFileForm.Sample
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
-            {
                 app.UseDeveloperExceptionPage();
-            }
 
             app.UseRouting();
-            // use big file form middleware
-            app.UseBigFileForm();
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
     }
