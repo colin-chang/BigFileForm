@@ -2,18 +2,20 @@
 
 ## What this is about?
 
-an Asp.Net Core middleware that can process multiple form parameters including big files and texts in a `POST/PUT` method by overriding object `HttpConext.Request.Form` and `HttpConext.Request.Form.Files`.
-
+an extension for Asp.Net Core HttpRequest that can process multiple form parameters including big files and texts in a POST/PUT method.
 
 ## How to use it?
-this middleware is easy to be used by a few steps.
+this extension is easy to be used by a few steps.
 ### configuration
 configures the file size limitation in `appsettings.json`.
 ```json
 {
   "BigFileFormOptions": {
-    "MinBodySize": 5242880,
-    "MaxBodySize": 209715200
+    "FileSizeLimit": 209715200,
+    "PermittedExtensions": [
+      ".apk",
+      ".ipa"
+    ]
   }
 }
 ```
@@ -26,46 +28,48 @@ public void ConfigureServices(IServiceCollection services)
     services.AddControllers();
 }
 ```
-### use the middleware
-```csharp
-public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-{
-    app.UseRouting();
-
-    //use big file form middleware
-    app.UseBigFileForm();
-    app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
-}
-```
 
 ### try it
-after using this middleware, you could get your big file and text parameters by `Request.Form.Files` and `Request.Forms` when you try to upload a big file between `MinBodySize` and `MaxBodySize`. It can only work in a POST or PUT method.
-
+this only works in a POST or PUT method.
 
 ```csharp
 [ApiController]
 [Route("[controller]")]
 public class TestController : ControllerBase
 {
-    private ILogger _logger;
-    public TestController(ILogger<TestController> logger) => _logger = logger;
+    private readonly BigFileFormOptions _options;
+    private readonly string _baseDirectory;
+    private readonly ILogger _logger;
+
+    public TestController(IOptions<BigFileFormOptions> options, IHostEnvironment env,
+        ILogger<TestController> logger)
+    {
+        _options = options.Value;
+        _baseDirectory = env.ContentRootPath;
+        _logger = logger;
+    }
 
     [HttpPost]
     [DisableFormValueModelBinding]
     [DisableRequestSizeLimit]
     public async Task PostAsync()
     {
-        var releaseNotes = Request.Form["releasenotes"];
-        _logger.LogInformation(releaseNotes);
+        var parameters = await Request.ExtractFormAsync(_options, (name, fileName) =>
+            System.IO.File.Create(Path.Combine(_baseDirectory, WebUtility.HtmlEncode(fileName))));
 
-        var app = Request.Form.Files["app"];
-        await using var fileStream = System.IO.File.Create(app.FileName);
-        await app.CopyToAsync(fileStream);
+        string releaseNotes;
+        releaseNotes = parameters.Texts[nameof(releaseNotes).ToLower()];
+        _logger.LogInformation($"{nameof(releaseNotes)}:{releaseNotes}");
+
+        string app;
+        if (parameters.Files.TryGetValue(nameof(app), out app))
+            _logger.LogInformation($"{nameof(app)}:{app}");
+
+        foreach (var (key, value) in parameters.Errors)
+            _logger.LogError($"error occured when process {key}: {value} ");
     }
 }
 ```
-
-![upload big file with multiple parameters](https://i.loli.net/2020/08/27/7MqlOGDm8IAkiwx.jpg)
 
 ### file size limitation
 when we try to upload a big file, we have to know both the Kestrel server and default form have its limitation. We could adjust them by configuring `KestrelServerOptions` and `FormOptions`.
@@ -84,9 +88,12 @@ when we try to upload a big file, we have to know both the Kestrel server and de
     }
   },
   "BigFileFormOptions": {
-    "MinBodySize": 5242880,
-    "MaxBodySize": 209715200
-  }
+      "FileSizeLimit": 209715200,
+      "PermittedExtensions": [
+        ".apk",
+        ".ipa"
+      ]
+    }
 }
 ```
 ```csharp
@@ -111,8 +118,7 @@ public void ConfigureServices(IServiceCollection services)
 ```
 
 ## Sample
-[Sample project](https://github.com/colin-chang/BigFileForm/tree/master/ColinChang.BigFileForm.Sample) shows how to use this middleware. 
-
+[Sample project](https://github.com/colin-chang/BigFileForm/tree/master/ColinChang.BigFileForm.Sample) shows how to use this extension. 
 
 ## Nuget
 https://www.nuget.org/packages/ColinChang.BigFileForm
